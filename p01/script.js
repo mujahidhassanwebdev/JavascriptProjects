@@ -36,8 +36,10 @@ function checkRequired(inputArray) {
     inputArray.forEach(element => {
         if(element.value === '') {
             showError(element,  `${capitalizeInputName(element)} is required`)
+            
         } else {
             showSuccess(element);
+            
         }
     });
 }
@@ -49,13 +51,39 @@ function capitalizeInputName(inputID) {
     
 }
 
+// function to check the length of the field (min and max)
+
+function checkLength(input, min, max) {
+    if (input.value.length >= min && input.value.length <= max) {
+        showSuccess(input);   
+        
+    } else {
+        showError(input, `${capitalizeInputName(input)} needs to be minimum ${min} and maximum ${max}`);
+    }
+}
+
+// Function to check if password and confirm password text are matching
+
+function checkConfirmPassword(input1, input2) {
+   if (input1.value !== input2.value) {
+        showError(input2, 'Password and Confirm Password does not match');
+   } else {
+       showSuccess(input2);
+   } 
+}
+
 // This is an event listener for a form on submit
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     // Check Required Fields 
-    checkRequired([username, email, password, password2]);
-
+    checkRequired([username, email, password, password2])
+    checkLength(username, 3, 10);
+    checkLength(password, 6, 30);
+    isEmailValid(email);
+    checkConfirmPassword(password, password2);
+    
+    
 
 })
 
