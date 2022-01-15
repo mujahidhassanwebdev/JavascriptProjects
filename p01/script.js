@@ -20,6 +20,16 @@ function showSuccess(inputField) {
     formControlElement.className = 'form-control success';
 }
 
+// Function to check email validity
+function isEmailValid(email) {
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))
+  {
+    showSuccess(email);
+  }
+  else {
+      showError(email,'You have entered an invalid email address!');
+  }    
+}
 
 // This is an event listener for a form on submit
 form.addEventListener('submit', (e) => {
@@ -37,6 +47,7 @@ form.addEventListener('submit', (e) => {
     }
     else {
         showSuccess(email);
+        isEmailValid(email);
     }
 
     if (password.value === '') {
