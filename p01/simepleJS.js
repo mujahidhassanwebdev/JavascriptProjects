@@ -31,30 +31,38 @@ function isEmailValid(email) {
   }    
 }
 
-// Function to check if required fields have data
-function checkRequired(inputArray) {
-    inputArray.forEach(element => {
-        if(element.value === '') {
-            showError(element,  `${capitalizeInputName(element)} is required`)
-        } else {
-            showSuccess(element);
-        }
-    });
-}
-
-// function to get capitlize name
-function capitalizeInputName(inputID) {
-    
-    return inputID.id.charAt(0).toUpperCase() + inputID.id.slice(1);
-    
-}
-
 // This is an event listener for a form on submit
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    // Check Required Fields 
-    checkRequired([username, email, password, password2]);
+    if (username.value === '') {
+        showError(username, "Username is a required field");
+    }
+    else {
+        showSuccess(username);
+    }
+
+    if (email.value === '') {
+        showError(email, "Email is a required field");
+    }
+    else {
+        showSuccess(email);
+        isEmailValid(email);
+    }
+
+    if (password.value === '') {
+        showError(password, "Password is a required field");
+    }
+    else {
+        showSuccess(password);
+    }
+
+    if (password2.value === '') {
+        showError(password2, "Confirm Password is a required field");
+    }
+    else {
+        showSuccess(password2);
+    }
 
 
 })
